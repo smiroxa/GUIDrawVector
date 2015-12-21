@@ -5,11 +5,10 @@ public class Frame extends JFrame
     public Frame()
     {
         setTitle("GUI VECTOR");
-        setBounds(200, 200, 600, 500);
+        setBounds(0, 0, 750, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        add( new WPanel() );
-
+        System.out.println("Frame: Creating new instance PanelMain");
+        add( new PanelMain());
         setVisible(true);
     }
 }

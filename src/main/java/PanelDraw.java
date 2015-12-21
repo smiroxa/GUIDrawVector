@@ -1,53 +1,51 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
 
-import javax.swing.JPanel;
-
-public class Panel extends JPanel implements MouseListener, MouseMotionListener
+public class PanelDraw extends JPanel implements MouseListener, MouseMotionListener
 {
 
     int x = 0;
     int y = 0;
 
-    Data xd = null;
+    PanelData panelData = null;
 
-    ArrayList<Figure> pic = new ArrayList<Figure>();
-
-    public Panel(Data xd)
+    public PanelDraw(PanelData panelData)
     {
-        setBounds(100, 0, 500, 500);
-        this.xd = xd;
+        setBackground(Color.WHITE);
+        setBounds(170, 10, 565, 545);
+        this.panelData = panelData;
+        BorderFactory.createLineBorder(Color.red);
         addMouseListener(this);
         addMouseMotionListener(this);
     }
 
     @Override
-    public void mousePressed(java.awt.event.MouseEvent e)
+    public void mousePressed(MouseEvent e)
     {
         x = e.getX();
         y = e.getY();
     }
     @Override
-    public void mouseDragged(java.awt.event.MouseEvent e)
+    public void mouseDragged(MouseEvent e)
     {
-        if( xd.figureType == 1)
+        if( panelData.figureType == 1)
         {
-            pic.add( new Figure(x, y, e.getX(), e.getY(), xd.width, xd.col, xd.figureType) );
+            panelData.setPic(new Figure(x, y, e.getX(), e.getY(), panelData.width, panelData.col, panelData.figureType));
             x = e.getX();
             y = e.getY();
             repaint();
         }
     }
     @Override
-    public void mouseReleased(java.awt.event.MouseEvent e)
+    public void mouseReleased(MouseEvent e)
     {
-        if(xd.figureType == 1)
+        if(panelData.figureType == 1)
             return;
 
-        pic.add( new Figure(x, y, e.getX(), e.getY(), xd.width, xd.col, xd.figureType) );
+        panelData.setPic( new Figure(x, y, e.getX(), e.getY(), panelData.width, panelData.col, panelData.figureType ));
         repaint();
     }
 
@@ -56,9 +54,10 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener
     {
         super.paint(g);
         Graphics2D gg = (Graphics2D) g;
-        for( Figure p : pic)
+        for( Figure p : panelData.getPic())
         {
             gg.setColor(p.col);
+            gg.setStroke(new BasicStroke(p.width));
             switch (p.type)
             {
                 case 1: gg.drawLine(p.x1, p.y1, p.x2, p.y2); break;
