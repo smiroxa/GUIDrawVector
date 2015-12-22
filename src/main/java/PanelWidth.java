@@ -8,7 +8,7 @@ public class PanelWidth extends JPanel implements ChangeListener
     PanelData panelData = null;
     static final int MIN = 1;
     static final int MAX = 10;
-    static final int INIT = 1;
+    static final int INIT = 3;
 
     public PanelWidth(PanelData panelData)
     {

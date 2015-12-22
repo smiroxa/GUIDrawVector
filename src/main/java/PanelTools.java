@@ -29,7 +29,11 @@ public class PanelTools extends JPanel
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            panelData.setFigureType(Integer.parseInt(e.getActionCommand()));
+            panelData.setFigureType(
+                    Integer.parseInt(
+                            e.getActionCommand()
+                    )
+            );
         }
     }
 }

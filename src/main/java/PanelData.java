@@ -25,7 +25,7 @@ public class PanelData
 
     public ArrayList<Figure> getPic()
     {
-        return pic;
+        return this.pic;
     }
 
     public void setPic(Figure pic)
